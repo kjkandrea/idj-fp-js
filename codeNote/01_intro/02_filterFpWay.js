@@ -71,6 +71,12 @@ function find (list, predicate) {
   }
 }
 
+function bMatch1(key, val) {
+  return function(obj) {
+    return obj[key] === val;
+  }
+}
+
 function main () {
   const userUnder30Names = map(
     filter(users, user => user.age < 33),
@@ -79,7 +85,7 @@ function main () {
 
   console.group('find')
   console.log(
-    find(users, user => user.id === 3),
+    find(users, bMatch1('id', 3)),
     find(users, user => user.name.includes('P')),
   )
   console.groupEnd()
