@@ -11,7 +11,7 @@ const users = [
 function filter (list, predicate) {
   const newList = []
   for (let i = 0, len = list.length; i < len; i++) {
-    if (predicate(list[i])) {
+    if (predicate(list[i])) { // predicate : 명제. 로직을 predicate 란 명칭으로 위임한다는 네이밍인듯.
       newList.push(list[i])
     }
   }
