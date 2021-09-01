@@ -1,3 +1,5 @@
+import { findIndex } from './02_2_findIndex.js'
+
 const users = [
   { id: 1, name: 'ID', age: 32 },
   { id: 2, name: 'HA', age: 25 },
@@ -133,6 +135,11 @@ function main () {
 
   console.log(
     find(users, bmatch({ age: 32, name: 'JM' }))
+  )
+
+  console.log(
+    findIndex(users, bmatch({ age: 32, name: 'JM' })),
+    findIndex(users, user => user.age === 32 && user.name === 'JM')
   )
 }
 

@@ -15,7 +15,7 @@ const entries = [
 const run = chapter => entries[chapter]()
 
 function main () {
-  run(3)
+  run(1)
 }
 
 export default main
