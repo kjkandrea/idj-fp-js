@@ -34,9 +34,18 @@ function filter (list, predicate) {
   return newList
 }
 
+function map(list, iteratee) {
+  const newList = [];
+  for (let i = 0, len = list.length; i < len; i++) {
+    newList.push(iteratee(list[i]))
+  }
+  return newList;
+}
+
 function main () {
+  const userUnder30 = filter(users, user => user.age < 33)
   console.log(
-    filter(users, user => user.age < 30)
+    map(userUnder30, user => user.name)
   )
 }
 
