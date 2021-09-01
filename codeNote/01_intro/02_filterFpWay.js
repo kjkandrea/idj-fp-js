@@ -57,9 +57,17 @@ function findBy (key, list, id) {
   }
 }
 
-function find(list, predicate) {
+/**
+ * @find
+ * findBy 와 비교할때에, 인자를 String 이나, Number 대신 Function 으로 변경한 작은 차이가 매우 큰 차이를
+ *   만들었다. find 는 배열에 어떤 값이 들어있던 보조함수(predicate) 를 통해 원하는 바를 이룰 수 있다. 함수형
+ *   자바스크립트는 이처럼 다형성이 높은 기법을 많이 사용하며 이러한 기법은 정말 실용적이다.
+ */
+function find (list, predicate) {
   for (let i = 0, len = list.length; i < len; i++) {
-    if (predicate(list[i])) return list[i]
+    if (predicate(list[i])) {
+      return list[i]
+    }
   }
 }
 
@@ -68,10 +76,13 @@ function main () {
     filter(users, user => user.age < 33),
     bValue('name'), // user => user.name
   )
+
+  console.group('find')
   console.log(
-    userUnder30Names,
-    find(users, user => user.id === 3)
+    find(users, user => user.id === 3),
+    find(users, user => user.name.includes('P')),
   )
+  console.groupEnd()
 }
 
 export default main
