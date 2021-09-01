@@ -1,19 +1,21 @@
 import addMaker from './01_addMaker.js'
 import filterFpWay from './02_filterFpWay.js'
-import predicate from './02_1_predicate.js'
+import higherOrderFunction from './02_1_higherOrderFunction.js'
+import findIndex from './02_2_findIndex.js'
 
 // import './02_filterOldWay.js'
 
 const entries = [
   addMaker,
   filterFpWay,
-  predicate
+  higherOrderFunction,
+  findIndex
 ]
 
 const run = chapter => entries[chapter]()
 
-function main() {
-  run(1)
+function main () {
+  run(3)
 }
 
-export default main;
+export default main
