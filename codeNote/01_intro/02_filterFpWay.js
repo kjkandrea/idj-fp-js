@@ -43,9 +43,12 @@ function map(list, iteratee) {
 }
 
 function main () {
-  const userUnder30 = filter(users, user => user.age < 33)
+  const userUnder30Names = map(
+    filter(users, user => user.age < 33),
+    user => user.name
+  )
   console.log(
-    map(userUnder30, user => user.name)
+    userUnder30Names
   )
 }
 
