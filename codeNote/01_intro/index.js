@@ -1,7 +1,8 @@
 import addMaker from './01_addMaker.js'
-// import './02_filterOldWay.js'
 import filterFpWay from './02_filterFpWay.js'
 import predicate from './02_1_predicate.js'
+
+// import './02_filterOldWay.js'
 
 const entries = [
   addMaker,
@@ -12,7 +13,7 @@ const entries = [
 const run = chapter => entries[chapter]()
 
 function main() {
-  run(2)
+  run(1)
 }
 
 export default main;

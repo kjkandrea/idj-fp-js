@@ -77,6 +77,23 @@ function bMatch1(key, val) {
   }
 }
 
+function object(key,val) {
+  const obj = {}
+  obj[key] = val
+  return obj
+}
+
+function match(obj, obj2) {
+  for (const key in obj2) {
+    return obj[key] === obj2[key]
+  }
+}
+
+function bmatch(obj2, val) {
+  if (arguments.length === 2) obj2 = object(obj2, val); // 인자가 2개일 경우를 가정한다는것은 1개 일 수도 있다는것. 이렇게 하니깐 햇갈리는데..
+  return obj => match(obj, obj2)
+}
+
 function main () {
   const userUnder30Names = map(
     filter(users, user => user.age < 33),
@@ -89,6 +106,33 @@ function main () {
     find(users, user => user.name.includes('P')),
   )
   console.groupEnd()
+
+  console.group('bmatch')
+  console.log(
+    bmatch('id', 3)({ id: 3, name: 'BJ', age: 32 }) // true
+  )
+  console.groupEnd()
+
+  console.log(
+    match(
+      find(
+        users,
+        bmatch('id', 3)
+      ), // { id: 3, name: 'BJ', age: 32 }
+      find(
+        users,
+        bmatch('name', 'BJ')
+      ) // { id: 3, name: 'BJ', age: 32 }
+    ) // true
+  )
+
+  console.log(
+    find(users, user => user.age === 32 && user.name === 'JM')
+  )
+
+  console.log(
+    find(users, bmatch({ age: 32, name: 'JM' }))
+  )
 }
 
 export default main
