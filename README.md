@@ -15,7 +15,7 @@
 가령 find 함수의 경우 아래처럼 표기해야하나? 분명 한계가 있을텐데..
 
 ``` typescript
-function find <T>(list: T[], predicate: Function) {
+function find <T>(list: T[], predicate: T => boolean) {
   for (let i = 0, len = list.length; i < len; i++) {
     if (predicate(list[i])) {
       return list[i] // T
