@@ -36,7 +36,14 @@ function main() {
     _.map(list, string => string[0])?.join(''),
     _.filter(list, string => string.includes('똥')),
     _.find(list, string => string[0] === '똥'),
-    _.findIndex(list, string => string.includes('개똥'))
+    _.findIndex(list, string => string.includes('개똥')),
+    '\n',
+    'use index : ',
+    _.filter(list, (_, i) => i <= 1),
+    _.filter(list, (_, i) => i % 2)
+
   )
 }
 main()
+
+export default _;

@@ -1,4 +1,5 @@
 import { findIndex } from './02_2_findIndex.js'
+import _ from './02_03_underscore.js'
 
 const users = [
   { id: 1, name: 'ID', age: 32 },
