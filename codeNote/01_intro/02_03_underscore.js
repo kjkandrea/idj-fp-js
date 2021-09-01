@@ -29,6 +29,8 @@ _.findIndex = function(list, predicate) {
   return -1;
 }
 
+_.identity = v => v;
+
 function main() {
   const list = ['개똥아', '똥쌋니', '아니요']
 
@@ -40,8 +42,10 @@ function main() {
     '\n',
     'use index : ',
     _.filter(list, (_, i) => i <= 1),
-    _.filter(list, (_, i) => i % 2)
-
+    _.filter(list, (_, i) => i % 2),
+    '\n',
+    'identity : ',
+    _.filter([0 , 1, '', 'char', undefined, null, Number('🙅'), [], {}], _.identity) // Truthy Values
   )
 }
 main()
