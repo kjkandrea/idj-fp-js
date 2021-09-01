@@ -30,7 +30,7 @@ function main() {
    * 2. map 은 users 길이만큼 루프를 돌고 여기서 list[i] 는 user 이다. 따라서
    *    newList.push(iteratee(user))
    * 3. iteratee(user) 는 다음과 같다.
-   *    user => user['name']
+   *    user['name']
    *
    * 이게 어렵게 느껴지는 이유 : 함수를 리턴하는 함수를 잘 쓰지 않아봐서. 조바심내지말고 천천히 읽어보면 될듯
    *
