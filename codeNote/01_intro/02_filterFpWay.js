@@ -48,10 +48,10 @@ function bValue (key) {
   }
 }
 
-function findById (list, id) {
+function findBy (key, list, id) {
   for (let i = 0, len = list.length; i < len; i++) {
-    console.log('findById i : ', i)
-    if (list[i].id === id) {
+    console.log('findBy i : ', i)
+    if (list[i][key] === id) {
       return list[i]
     } // break;
   }
@@ -64,7 +64,7 @@ function main () {
   )
   console.log(
     userUnder30Names,
-    findById(users, 3)
+    findBy('id', users, 3)
   )
 }
 
