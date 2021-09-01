@@ -34,27 +34,37 @@ function filter (list, predicate) {
   return newList
 }
 
-function map(list, iteratee) {
-  const newList = [];
+function map (list, iteratee) {
+  const newList = []
   for (let i = 0, len = list.length; i < len; i++) {
     newList.push(iteratee(list[i]))
   }
-  return newList;
+  return newList
 }
 
-function bValue(key) {
-  return function(obj) {
+function bValue (key) {
+  return function (obj) {
     return obj[key]
+  }
+}
+
+function findById (list, id) {
+  for (let i = 0, len = list.length; i < len; i++) {
+    console.log('findById i : ', i)
+    if (list[i].id === id) {
+      return list[i]
+    } // break;
   }
 }
 
 function main () {
   const userUnder30Names = map(
     filter(users, user => user.age < 33),
-    bValue('name') // user => user.name
+    bValue('name'), // user => user.name
   )
   console.log(
-    userUnder30Names
+    userUnder30Names,
+    findById(users, 3)
   )
 }
 
