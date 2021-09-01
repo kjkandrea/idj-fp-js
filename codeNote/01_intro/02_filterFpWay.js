@@ -42,10 +42,16 @@ function map(list, iteratee) {
   return newList;
 }
 
+function bValue(key) {
+  return function(obj) {
+    return obj[key]
+  }
+}
+
 function main () {
   const userUnder30Names = map(
     filter(users, user => user.age < 33),
-    user => user.name
+    bValue('name')
   )
   console.log(
     userUnder30Names
