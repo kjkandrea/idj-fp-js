@@ -51,7 +51,7 @@ function bValue(key) {
 function main () {
   const userUnder30Names = map(
     filter(users, user => user.age < 33),
-    bValue('name')
+    bValue('name') // user => user.name
   )
   console.log(
     userUnder30Names
