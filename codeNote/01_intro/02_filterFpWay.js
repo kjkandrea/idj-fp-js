@@ -85,8 +85,9 @@ function object(key,val) {
 
 function match(obj, obj2) {
   for (const key in obj2) {
-    return obj[key] === obj2[key]
+    if (obj[key] !== obj2[key]) return false;
   }
+  return true;
 }
 
 function bmatch(obj2, val) {
@@ -127,7 +128,7 @@ function main () {
   )
 
   console.log(
-    find(users, user => user.age === 32 && user.name === 'JM')
+    find(users, user => user.age === 32 && user.name === 'JM') // { id: 6, name: 'JM', age: 32 }
   )
 
   console.log(
