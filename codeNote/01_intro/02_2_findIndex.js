@@ -1,4 +1,4 @@
-function findIndex(list, predicate) {
+export function findIndex(list, predicate) {
   for (let i = 0, len = list.length; i < len; i++) {
     if (predicate(list[i])) return i;
   }
