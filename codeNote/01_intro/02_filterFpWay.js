@@ -57,6 +57,12 @@ function findBy (key, list, id) {
   }
 }
 
+function find(list, predicate) {
+  for (let i = 0, len = list.length; i < len; i++) {
+    if (predicate(list[i])) return list[i]
+  }
+}
+
 function main () {
   const userUnder30Names = map(
     filter(users, user => user.age < 33),
@@ -64,7 +70,7 @@ function main () {
   )
   console.log(
     userUnder30Names,
-    findBy('id', users, 3)
+    find(users, user => user.id === 3)
   )
 }
 
