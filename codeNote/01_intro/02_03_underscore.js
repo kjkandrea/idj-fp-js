@@ -31,6 +31,14 @@ _.findIndex = function(list, predicate) {
 
 _.identity = v => v;
 
+_.some = function(list) {
+  return !!_.find(list, _.identity);
+}
+
+_.every = function(list) {
+  return _.filter(list, _.identity).length === list.length;
+}
+
 function main() {
   const list = ['개똥아', '똥쌋니', '아니요']
 
@@ -45,7 +53,11 @@ function main() {
     _.filter(list, (_, i) => i % 2),
     '\n',
     'identity : ',
-    _.filter([0 , 1, '', 'char', undefined, null, Number('🙅'), [], {}], _.identity) // Truthy Values
+    _.filter([0 , 1, '', 'char', undefined, null, Number('🙅'), [], {}], _.identity), // Truthy Values
+    'some : ',
+    _.some([1, 0, null]),
+    'every : ',
+    _.every([1, 0, null])
   )
 }
 main()
