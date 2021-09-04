@@ -126,6 +126,6 @@ function main() {
     _.every([2, 0, null]), // 배열 아이템이 모두 Truthy value 인지 검사. 내가아는 every 랑 틀린데...
   )
 }
-main()
+// main()
 
 export default _;
