@@ -17,12 +17,30 @@
 const f1 = () => {}
 const a = typeof f1 === 'function' ? f1 : function() {}
 
+// 2. f2는 함수를 리턴한다.
+function f2() {
+  return function() {}
+}
+
+// 3. a와 b를 더하는 익명 험수를 선언하였으며, a와 b에 rkr 10, 5를 전달하여 즉시 실행 했다.
+(function (a, b) {
+  return a + b;
+})(10, 5)
+
+// 4. callAndAdd 를 실행하며 익명 함수들을 선언했고 바로 인자로 사용되었다. 넘겨받는 함수 둘을 실행하여 결과들을 더한다.
+function callAndAdd(a, b) {
+  return a() + b();
+}
 
 function main() {
   console.log(
-    'javascript dojo\n',
-    'a :',
-    a
+    'javascript dojo',
+    '\na :',
+    a,
+    '\nf2 :',
+    f2,
+    '\ncallAndAdd() :',
+    callAndAdd(() => 10, () => 5)
   )
 }
 
