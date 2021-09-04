@@ -1,13 +1,15 @@
 import firstClassFunction from './01_fisrtClassFunction.js';
+import closure from './02_closure.js'
 
 const entries = [
-  firstClassFunction
+  firstClassFunction,
+  closure
 ]
 
 const run = chapter => entries[chapter]()
 
 function main () {
-  run(0)
+  run(1)
 }
 
 export default main
