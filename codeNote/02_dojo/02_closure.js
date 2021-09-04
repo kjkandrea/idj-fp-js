@@ -62,6 +62,22 @@ function main() {
   console.log(
     f5()
   )
+
+  function f7() {
+    let a = 10;
+    function f8(b) { // 이 아이는 클로저이다. 기억해줘 🤚
+      return a + b;
+    }
+    return f8;
+  }
+
+  const f9 = f7(); // 기억할게 ✊
+  console.log(
+    'f9(20) :',
+    f9(20), // 30
+    'f9(10) :',
+    f9(10) // 20
+  )
 }
 
 export default main
