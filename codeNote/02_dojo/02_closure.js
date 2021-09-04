@@ -37,6 +37,19 @@ function main() {
   console.log(
     f1() // 30
   )
+
+  function f2() {
+    let a = 10, b = 20;
+    function f3(c, d) { // 얘도 클로저가 아니다. 변수 a, b 를 사용하지 않았다. f3가 기억 할 변수가 하나도 없다.
+      return c + d;
+    }
+    return f3;
+  }
+
+  const f4 = f2();
+  console.log(
+    f4(5, 7)
+  )
 }
 
 export default main
