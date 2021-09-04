@@ -74,7 +74,7 @@ function useComposeInside() {
   return welcome('moe');
 }
 
-_.some = _.compose(not, not, positive);
+_.some = _.compose(not, not, positive); // <= 방향으로 실행된대요!
 // function(list) {
 //   return not(not(positive(list)));
 // }
