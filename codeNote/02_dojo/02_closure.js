@@ -29,6 +29,14 @@ function main() {
     '\nparent() :',
     parent()
   )
+
+  let a = 10, b = 20;
+  function f1() {
+    return a + b; // a, b 변수가 f1에 의해 사라지지 못하므로 클로저가 아니다. ( 내 코드에선 함수 내부에 있으니깐 클로저인가? ㅋㅋ )
+  }
+  console.log(
+    f1() // 30
+  )
 }
 
 export default main
