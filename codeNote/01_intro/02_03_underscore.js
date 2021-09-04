@@ -59,10 +59,10 @@ _.every = function(list) {
 }
 
 _.compose = function() {
-  const args = arguments;
-  const start = args.length - 1;
+  const args = arguments; // function[]
+  const start = args.length - 1; // 가장 마지막  index
   return function() {
-    let i = start;
+    let i = start; // 가장 마지막 index
     let result = args[start].apply(this, arguments);
     while(i--) result = args[i].call(this, result);
     return result;
@@ -74,6 +74,13 @@ function useCompose() {
   const exclaim = function(statement) { return statement.toUpperCase() + '!'};
   const welcome = _.compose(greeting, exclaim);
   return welcome('moe');
+}
+
+function useComposeInside() {
+  const greeting = function(name) { return 'hi: ' + name; };
+  const exclaim = function(statement) { return statement.toUpperCase() + '!'};
+
+  return greeting(exclaim('moe'))
 }
 
 function main() {
@@ -114,6 +121,8 @@ function main() {
     '\n',
     'compose : ',
     useCompose(),
+    'useComposeInside : ',
+    useComposeInside(),
   )
 }
 main()
