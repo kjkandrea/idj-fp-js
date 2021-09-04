@@ -79,8 +79,8 @@ function useCompose() {
 function useComposeInside() {
   const greeting = function(name) { return 'hi: ' + name; };
   const exclaim = function(statement) { return statement.toUpperCase() + '!'};
-
-  return greeting(exclaim('moe'))
+  const welcome = name => greeting(exclaim(name))
+  return welcome('moe');
 }
 
 function main() {
