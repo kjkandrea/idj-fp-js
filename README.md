@@ -1,6 +1,8 @@
 # idj-fp-js
 함수형 자바스크립트 프로그래밍(유인동 저) 코드 필기
 
+원본 : [indongyoo/functional-javascript](https://github.com/indongyoo/functional-javascript)
+
 ## shortCut
 
 > Reformat a code fragment in a file﻿. `⌥⌘L`

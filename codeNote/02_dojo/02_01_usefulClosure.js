@@ -6,8 +6,16 @@
  * - 함수로 함수를 만들거나 부분 적용을 할 때
  */
 
+// 이전상황을 나중에 일어날 상황과 이어나갈 때
+function relay() {
+
+}
+
 function main() {
-  console.log('confuse')
+  console.log(
+    'relay :',
+    relay()
+  )
 }
 
 export default main;
