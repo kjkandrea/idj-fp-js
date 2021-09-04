@@ -31,14 +31,6 @@ _.findIndex = function(list, predicate) {
 
 _.identity = v => v;
 
-_.some = function(list) {
-  return !!_.find(list, _.identity);
-}
-
-_.every = function(list) {
-  return _.filter(list, _.identity).length === list.length;
-}
-
 function not(v) {
   return !v;
 }
@@ -47,6 +39,15 @@ function beq(a) {
   return function(b) {
     return a === b;
   }
+}
+
+_.some = function(list) {
+  return !!_.find(list, _.identity);
+}
+
+_.every = function(list) {
+  // return _.filter(list, _.identity).length === list.length;
+  return beq(-1)(_.findIndex(list, not))
 }
 
 function main() {
