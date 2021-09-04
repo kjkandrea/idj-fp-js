@@ -49,15 +49,6 @@ function negativeIndex(list) {
   return _.findIndex(list, not);
 }
 
-_.some = function(list) {
-  return not(not(positive(list)));
-}
-
-_.every = function(list) {
-  // return _.filter(list, _.identity).length === list.length;
-  return beq(-1)(negativeIndex(list))
-}
-
 _.compose = function() {
   const args = arguments; // function[]
   const start = args.length - 1; // 가장 마지막  index
@@ -82,6 +73,16 @@ function useComposeInside() {
   const welcome = name => greeting(exclaim(name))
   return welcome('moe');
 }
+
+_.some = _.compose(not, not, positive);
+// function(list) {
+//   return not(not(positive(list)));
+// }
+
+_.every = _.compose(beq(-1), negativeIndex);
+// function(list) {
+//   return beq(-1)(negativeIndex(list))
+// }
 
 function main() {
   const list = ['개똥아', '똥쌋니', '아니요']
@@ -114,15 +115,15 @@ function main() {
     'negativeIndex : ',
     negativeIndex([2, 0, null]),
     '\n',
-    'some : ',
-    _.some([2, 0, null]), // 배열중에 Truthy value 가 있는지 검사. 내가아는 some 이랑 틀린데...
-    'every : ',
-    _.every([2, 0, null]), // 배열 아이템이 모두 Truthy value 인지 검사. 내가아는 every 랑 틀린데...
-    '\n',
     'compose : ',
     useCompose(),
     'useComposeInside : ',
     useComposeInside(),
+    '\n',
+    'some : ',
+    _.some([2, 0, null]), // 배열중에 Truthy value 가 있는지 검사. 내가아는 some 이랑 틀린데...
+    'every : ',
+    _.every([2, 0, null]), // 배열 아이템이 모두 Truthy value 인지 검사. 내가아는 every 랑 틀린데...
   )
 }
 main()
