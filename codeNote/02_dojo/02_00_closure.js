@@ -71,13 +71,32 @@ function main() {
     return f8;
   }
 
-  const f9 = f7(); // 기억할게 ✊
+  const rememberA = f7(); // 기억할게 ✊
   console.log(
-    'f9(20) :',
-    f9(20), // 30
-    'f9(10) :',
-    f9(10) // 20
+    'rememberA(20) :',
+    rememberA(20), // 30
+    'rememberA(10) :',
+    rememberA(10) // 20
   )
+
+  function f9() {
+    let a = 10;
+    const f10 = function(c) {
+      return a + b + c;
+    }
+    let b = 20; // 클로저는 자신이 생성되는 스코프의 모든 라인, 어느 곳에서 선언된 변수든지 참조하고 기억할 수 있다.
+    return f10;
+  }
+
+  const f11 = f9()
+  console.log(
+    f11(30) // 60
+  )
+
+  /**
+   * 클로저는 자신이 생성되는 스코프의 실행 컨텍스트에서 만들어졌거나 알 수 있었던 변수 중 언젠가 자신이 실행될 때 사용할 변수들만 기억하는 함수이다.
+   * 클로저가 기억하는 변수의 값은 언제든지 남이나 자신에 의해 변경될 수 있다.
+   */
 }
 
 export default main
