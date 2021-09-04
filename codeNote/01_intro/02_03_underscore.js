@@ -39,6 +39,16 @@ _.every = function(list) {
   return _.filter(list, _.identity).length === list.length;
 }
 
+function not(v) {
+  return !v;
+}
+
+function beq(a) {
+  return function(b) {
+    return a === b;
+  }
+}
+
 function main() {
   const list = ['개똥아', '똥쌋니', '아니요']
 
@@ -57,7 +67,11 @@ function main() {
     'some : ',
     _.some([1, 0, null]), // 배열중에 Truthy value 가 있는지 검사. 내가아는 some 이랑 틀린데...
     'every : ',
-    _.every([1, 0, null]) // 배열 아이템이 모두 Truthy value 인지 검사. 내가아는 every 랑 틀린데...
+    _.every([1, 0, null]), // 배열 아이템이 모두 Truthy value 인지 검사. 내가아는 every 랑 틀린데...
+    'not : ',
+    not(0),
+    'beq : ',
+    beq(0)(0)
   )
 }
 main()
