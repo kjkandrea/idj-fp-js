@@ -24,7 +24,7 @@
             const button = $('<button>').text(user.name) // (2)
             button.click(function () { // (3) 계속 유지되는 클로저 (내부에서 user를 사용했다.)
                 if (confirm(user.name + '님을 팔로잉 하시겠습니까?')) {
-                    follow(user)
+                    follow(user) // 여기서 user 의 상태를 기억한다!!
                 } // (4)
             })
             return button // (5)
