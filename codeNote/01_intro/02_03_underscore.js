@@ -55,9 +55,9 @@ function main() {
     'identity : ',
     _.filter([0 , 1, '', 'char', undefined, null, Number('🙅'), [], {}], _.identity), // Truthy Values
     'some : ',
-    _.some([1, 0, null]),
+    _.some([1, 0, null]), // 배열중에 Truthy value 가 있는지 검사. 내가아는 some 이랑 틀린데...
     'every : ',
-    _.every([1, 0, null])
+    _.every([1, 0, null]) // 배열 아이템이 모두 Truthy value 인지 검사. 내가아는 every 랑 틀린데...
   )
 }
 main()
