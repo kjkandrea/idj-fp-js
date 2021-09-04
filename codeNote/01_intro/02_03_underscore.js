@@ -41,8 +41,12 @@ function beq(a) {
   }
 }
 
+function positive(list) {
+  return _.find(list, _.identity)
+}
+
 _.some = function(list) {
-  return !!_.find(list, _.identity);
+  return not(not(positive(list)));
 }
 
 _.every = function(list) {
@@ -65,14 +69,16 @@ function main() {
     '\n',
     'identity : ',
     _.filter([0 , 1, '', 'char', undefined, null, Number('🙅'), [], {}], _.identity), // Truthy Values
+    'not : ',
+    not(0),
+    'beq : ',
+    beq(0)(0),
+    'positive : ',
+    positive([1, 0, null]),
     'some : ',
     _.some([1, 0, null]), // 배열중에 Truthy value 가 있는지 검사. 내가아는 some 이랑 틀린데...
     'every : ',
     _.every([1, 0, null]), // 배열 아이템이 모두 Truthy value 인지 검사. 내가아는 every 랑 틀린데...
-    'not : ',
-    not(0),
-    'beq : ',
-    beq(0)(0)
   )
 }
 main()
