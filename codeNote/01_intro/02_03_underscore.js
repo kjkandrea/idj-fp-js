@@ -45,13 +45,17 @@ function positive(list) {
   return _.find(list, _.identity)
 }
 
+function negativeIndex(list) {
+  return _.findIndex(list, not);
+}
+
 _.some = function(list) {
   return not(not(positive(list)));
 }
 
 _.every = function(list) {
   // return _.filter(list, _.identity).length === list.length;
-  return beq(-1)(_.findIndex(list, not))
+  return beq(-1)(negativeIndex(list))
 }
 
 function main() {
@@ -74,11 +78,13 @@ function main() {
     'beq : ',
     beq(0)(0),
     'positive : ',
-    positive([1, 0, null]),
+    positive([2, 0, null]),
+    'negativeIndex : ',
+    negativeIndex([2, 0, null]),
     'some : ',
-    _.some([1, 0, null]), // 배열중에 Truthy value 가 있는지 검사. 내가아는 some 이랑 틀린데...
+    _.some([2, 0, null]), // 배열중에 Truthy value 가 있는지 검사. 내가아는 some 이랑 틀린데...
     'every : ',
-    _.every([1, 0, null]), // 배열 아이템이 모두 Truthy value 인지 검사. 내가아는 every 랑 틀린데...
+    _.every([2, 0, null]), // 배열 아이템이 모두 Truthy value 인지 검사. 내가아는 every 랑 틀린데...
   )
 }
 main()
