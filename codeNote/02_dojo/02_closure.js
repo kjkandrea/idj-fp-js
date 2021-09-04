@@ -50,6 +50,18 @@ function main() {
   console.log(
     f4(5, 7)
   )
+
+  function f5() {
+    let a = 10, b = 20;
+    function f6() { // 얘도 결과적으로는 클로저가 아니다! 왜냐면...
+      return a + b;
+    }
+    return f6(); // f6 를 실행하여 리턴한다.
+  } // 결국 f5 를 참조하는 곳이 어디에도 없기때문에 f5 가 사라지면 a, b도 사라질 수 있기에 클로저는 f5 가 실행되는 사이에만 생겼다가 사라진다.
+
+  console.log(
+    f5()
+  )
 }
 
 export default main
