@@ -56,6 +56,7 @@ function partialUselessCase () {
   console.log(add3(100, 100, 100, 100)) // 15. 버그
 
   // add3 는 재사용이 불가능하다.
+  // === partial 로 만들어진 함수는 단한번만 정상 동작한다.
 }
 
 function main () {
