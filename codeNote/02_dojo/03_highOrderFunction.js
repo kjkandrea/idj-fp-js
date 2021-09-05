@@ -1,4 +1,5 @@
 import _ from '../funderscore.js'
+import { users } from '../model.js'
 
 // 함수를 인자로 받아 실행하는 함수
 function callWith10 (val, func) {
@@ -29,6 +30,26 @@ function callWith (val1) {
   }
 }
 
+function useCallWith() {
+  console.clear();
+
+  console.log(
+    callWith([1, 2, 3])(v => v * 10, _.map), // [ 10, 20, 30 ]
+  )
+
+  _.get = (list, idx) => list[idx]
+
+  const callWithUsers = callWith(users)
+
+  console.log(
+    callWithUsers(2, _.get),
+    callWithUsers(user => user.age > 25, _.find),
+    callWithUsers(user => user.age > 25, _.filter),
+    callWithUsers(user => user.age > 25, _.some),
+    callWithUsers(user => user.age > 25, _.every),
+  )
+}
+
 function main () {
   console.log(
     'high order function',
@@ -50,11 +71,7 @@ function main () {
     )
   })();
 
-  (() => {
-    console.log(
-      callWith([1, 2, 3])(v => v * 10, _.map), // [ 10, 20, 30 ]
-    )
-  })()
+  useCallWith()
 }
 
 export default main
