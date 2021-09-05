@@ -24,7 +24,7 @@ function hoistingNinja() {
   function add(a, b) {
     return valid() ? a + b : '🙃';
 
-    function valid() {
+    function valid() { // valid 를 먼저 읽게 하면 코드가 다소 복잡하게 읽힐때다 있다. 이럴때 닌자 비급을 사용한다 함
       return Number.isInteger(a) && Number.isInteger(b);
     }
   }
