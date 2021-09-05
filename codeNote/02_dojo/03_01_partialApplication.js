@@ -1,3 +1,5 @@
+import _, { partial } from 'underscore'
+
 function useBind () {
   const add = (a, b) => a + b
   const add10 = add.bind(null, 10)
@@ -88,6 +90,48 @@ function partialProblemFix() {
   console.log(add3(100, 100, 100, 100)) // 403
 }
 
+function underscorePartial() {
+  function abc (a, b, c) {
+    console.log(a, b, c)
+  }
+
+  const ac = partial(abc, _, 'b');
+  ac('a', 'c') // a b c
+
+  const b = partial(abc, 'a', _, 'c');
+  b('b') // a b c
+
+  const ab = partial(abc, _, _, 'c');
+   ab('a') // a undefined c
+
+  const add2 = partial(add, _, 2); // 1이 올 자리를 비워둠
+  console.log(
+    add2(1), // 3
+    add2(1, 3, 4, 5), // 15. 이후에 인자를 더 많이 넘겨도 add 에 전달됨
+    add2(3, 5) // 10
+  )
+
+  function equal(a, b) {
+    return a === b;
+  }
+
+  const isUndefined = partial(equal, undefined) // a 자리에 undefined 적용해둠.
+  console.log(isUndefined(undefined)) // true
+
+  const bj = {
+    name: 'BJ',
+    greet: partial(function (a, b) { return a + this.name + b }, "저는 ", " 입니다."),
+  }
+  console.log(
+    bj.greet(), // 저는 BJ 입니다.
+    bj.greet.call({ name: 'HA' }) // 이후에도 this 를 바꿀 수 있음
+  )
+
+  const greetPj = bj.greet.bind({ name: "PJ" })
+  console.log(greetPj())
+
+  console.log(bj.greet()) // 여전히 잘 보존됨
+}
 
 function main () {
   console.log('partialApplication')
@@ -95,6 +139,7 @@ function main () {
   johnResigPartial()
   partialProblem()
   partialProblemFix()
+  underscorePartial()
 }
 
 export default main;
