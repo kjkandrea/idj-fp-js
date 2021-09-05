@@ -31,12 +31,28 @@ function hoistingNinja() {
 
   console.log(add(10, 5))
   console.log(add('🐕', 1004)) // 🙃
+}
 
+function IIFE_Ninja() {
+  !function(a) {
+    console.log(a)
+  }(1)
+
+  const b = function (a) {
+    console.log(a)
+  }(2)
+
+  const c = (a => console.log(a))(3)
+
+  new function() {
+    console.log(4)
+  }
 }
 
 function main() {
   objectKeyNinja()
   hoistingNinja()
+  IIFE_Ninja()
 }
 
 export default main
