@@ -1,22 +1,21 @@
-/*
- */
+import _ from '../funderscore.js'
 
 // 함수를 인자로 받아 실행하는 함수
-function callWith10(val, func) {
+function callWith10 (val, func) {
   return func(10, val)
 }
 
-function add(a, b) {
+function add (a, b) {
   return a + b
 }
 
-function sub(a, b) {
-  return a - b;
+function sub (a, b) {
+  return a - b
 }
 
 // 함수를 리턴하는 함수
-function constant(val) {
-  return function() {
+function constant (val) {
+  return function () {
     return val
   }
 }
@@ -24,14 +23,13 @@ function constant(val) {
 const allWays10 = constant(10)
 
 // 함수를 인자로받아 함수를 리턴하는 함수
-function callWith(val1) {
-  return function(val2, func) {
+function callWith (val1) {
+  return function (val2, func) {
     return func(val1, val2)
   }
 }
 
-
-function main() {
+function main () {
   console.log(
     'high order function',
     '\ncallWith10(20, add)',
@@ -48,9 +46,15 @@ function main() {
     console.log(
       'callWith',
       callWith10(20, add),
-      callWith5(4, sub)
+      callWith5(4, sub),
+    )
+  })();
+
+  (() => {
+    console.log(
+      callWith([1, 2, 3])(v => v * 10, _.map), // [ 10, 20, 30 ]
     )
   })()
 }
 
-export default main;
+export default main
