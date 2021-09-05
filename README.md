@@ -44,3 +44,14 @@ function find <T>(list: T[], predicate: T => boolean) {
 만일 고쳐야 되는 코드에 지역 변수도 없고 if, else, for 문도 없고, 커스텀 객체의 메서드도 없고, 인자 외의 외부 상태에 의존하고 있지 않다면 자신이 고쳐야 하는 함수의 문제에만 집중할 수 있다.
 
 > 작게 쪼개다 보면 정말 쓸모 없어 보이는 함수가 많이 나오기도 한다. 그래도 더 작은 단위로 쪼개 보라. 재사용성이 높고 재밌는 코드들이 나올 것이다. 제어문 대신 함수를, 값 대신 함수를, 연산자 대신 함수를 사용해 보자. 프로그래밍에 대한 새롭고 재밌는 아이디어들을 만나게 될 것이다.
+
+## 함수
+
+### instanceof '콜백함수' === '보조함수'
+
+모든 보조함수는 콜백함수가 아니다.
+callback 이 아닌 listener, iteratee, predicate 를 구분해보자.
+
+* `button.addEventListener('click', () => console.log('clicked'))` => listener
+* `users.forEach(user => console.log(user))` => iteratee
+* `users.filter(user => user.age > 5)` => predicate
