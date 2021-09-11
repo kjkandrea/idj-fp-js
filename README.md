@@ -55,3 +55,35 @@ callback 이 아닌 listener, iteratee, predicate 를 구분해보자.
 * `button.addEventListener('click', () => console.log('clicked'))` => listener
 * `users.forEach(user => console.log(user))` => iteratee
 * `users.filter(user => user.age > 5)` => predicate
+
+## 다시보는 underscore
+
+책을 읽기전의 underscore 인상 : lodash 하위 호환에 함수별 모듈 설치가 안되는 후진 녀석
+
+### underscore 는 fp 한 아이 이다.
+
+underscore 의 쓰잘데기 없어보이는 `_.noop`, `_.identity` 등을 활용해서 정말 작은 파편 단위의 함수로 로직을 추상화하고,
+이를 근사하게 조합하여 로직을 만들어 낸다. 
+
+### underscore 는 앞만 보고 달린다. 🏃‍♀️
+
+underscore 는 nullable 한 값을 받더라도 error 가 나지 않는 방식으로 코딩되어 있다. (이를 Monad 라고 부를 수 있을까?)
+
+가령 인자에 nullable 한 값을 넣는다면 내부적으로 다음과 같은 행위를 한다. 
+
+```
+underscore(null)
+
+function underscore(data) {
+  if (data === null || data === undefined) return []
+
+  // something awesome logic...
+  return result;  
+}
+```
+
+이러한 방식때문에 underscore 세계에서는 엉뚱한 인자를 넣더라도 error 가 나지않고 계속 달려갈 수 있는 것.
+
+물론 error 가 나지 않는다는것은 엉뚱한 result 가 나올 수도 있다는건데..
+
+javascript 의 유연함의 기조를 차용한 방식 정도로 이해함.. 100% 공감은 안감.. 
