@@ -17,7 +17,7 @@ _.values = list => _.map(list, _.identity)
 _.args0 = _.identity
 _.args1 = (a, b) => b
 
-_.keys = list => _.map(list, _.args1)
+_.keys = data => data ? Object.keys(data) : []
 
 _.array = () => []
 
@@ -44,4 +44,13 @@ export const test = () => {
   )
   _.each([1, 2, 3], console.log)
   _.each({ a: 3, b: 2, c: 1 }, console.log)
+  console.log(
+    '\n_.keys vs Object.keys',
+    _.keys({ puppy: '🐶'}), // puppy
+    Object.keys({ puppy: '🐶'}), // puppy
+    _.keys(10), // []
+    Object.keys(10), // []
+    _.keys(null), // []
+    // Object.keys(null) // TypeError: Cannot convert undefined or null to object
+  )
 }
