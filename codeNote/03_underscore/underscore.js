@@ -17,7 +17,7 @@ _.map = (data, iteratee) => {
       newList.push(iteratee(data[i], i, data))
   } else {
     for (let key in data)
-      if (data.hasOwnProperty(key)) newList.push(iteratee(data[i], i, data))
+      if (data.hasOwnProperty(key)) newList.push(iteratee(data[key], key, data))
   }
   return newList;
 }
@@ -25,5 +25,6 @@ _.map = (data, iteratee) => {
 
 export const test = () =>
   console.log(
-    _.map([1,2,3], num => num * 2)
+    _.map([1,2,3], num => num * 2), //array
+    _.map({ a: 3, b: 2, c: 1 }, num => num * 2), //array like
   )
