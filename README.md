@@ -73,7 +73,7 @@ underscore 는 nullable 한 값을 받더라도 error 가 나지 않는 방식�
 
 가령 인자에 nullable 한 값을 넣는다면 내부적으로 다음과 같은 행위를 한다. 
 
-```
+``` javascript
 underscore(null)
 
 function underscore(data) {
