@@ -27,4 +27,5 @@ export const test = () =>
   console.log(
     _.map([1,2,3], num => num * 2), //array
     _.map({ a: 3, b: 2, c: 1 }, num => num * 2), //array like
+    _.map([1,2,3], function(num){ return num * this }.bind(5))
   )
