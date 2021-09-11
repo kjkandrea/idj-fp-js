@@ -3,7 +3,7 @@ const _ = {}
 _.map = (list, iteratee) => {
   const newList = [];
   for (let i = 0, len = list.length; i < len; i++)
-    newList.push(iteratee(list[i]))
+    newList.push(iteratee(list[i], i, list))
   return newList;
 }
 
