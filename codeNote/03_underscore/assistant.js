@@ -1,4 +1,5 @@
 import { MAX_ARRAY_INDEX } from './const.js'
+import _ from './underscore.js'
 
 export const getLength = list => list == null ? void 0 : list.length
 
@@ -17,11 +18,9 @@ export const bloop = (newData, body) => {
       }
     }
     else {
-      for (let key in data) {
-        if (data.hasOwnProperty(key)) {
-          body(iteratee(data[key], key, data),
+      for (let i = 0, keys = _.keys(data), len = keys.length; i < len; i++) {
+          body(iteratee(data[keys[i]], keys[i], data),
             result)
-        }
       }
     }
     return result

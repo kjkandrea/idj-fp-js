@@ -54,3 +54,5 @@ export const test = () => {
     // Object.keys(null) // TypeError: Cannot convert undefined or null to object
   )
 }
+
+export default _;
