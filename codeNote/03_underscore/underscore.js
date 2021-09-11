@@ -22,10 +22,17 @@ _.map = (data, iteratee) => {
   return newList;
 }
 
+_.identity = v => v
+
+_.values = list => _.map(list, _.identity)
 
 export const test = () =>
   console.log(
+    'map :',
     _.map([1,2,3], num => num * 2), //array
     _.map({ a: 3, b: 2, c: 1 }, num => num * 2), //array like
-    _.map([1,2,3], function(num){ return num * this }.bind(5))
+    _.map([1,2,3], function(num){ return num * this }.bind(5)),
+    '\nvalues :',
+    _.values([1,2,3]),
+    _.values({ a: 3, b: 2, c: 1})
   )
