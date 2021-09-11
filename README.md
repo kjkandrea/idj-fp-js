@@ -65,6 +65,8 @@ callback 이 아닌 listener, iteratee, predicate 를 구분해보자.
 underscore 의 쓰잘데기 없어보이는 `_.noop`, `_.identity` 등을 활용해서 정말 작은 파편 단위의 함수로 로직을 추상화하고,
 이를 근사하게 조합하여 로직을 만들어 낸다. 
 
+직접 만들어보니 엄청 근사함. 
+
 ### underscore 는 앞만 보고 달린다. 🏃‍♀️
 
 underscore 는 nullable 한 값을 받더라도 error 가 나지 않는 방식으로 코딩되어 있다. (이를 Monad 라고 부를 수 있을까?)
@@ -87,3 +89,35 @@ function underscore(data) {
 물론 error 가 나지 않는다는것은 엉뚱한 result 가 나올 수도 있다는건데..
 
 javascript 의 유연함의 기조를 차용한 방식 정도로 이해함.. 100% 공감은 안감.. 
+
+### vs lodash
+
+underscore 는 앞만 보고 달리는 녀석이기에 지연 실행을 하지 않는다. 
+
+가령 [lodash chain](https://lodash.com/docs/4.17.15#chain) 을 사용하면 chaining 된 함수들은 모두 지연평가 된다.
+
+``` javascript
+// lodash
+var greats = _
+  .chain(normallys)
+  .map(someting)
+  .filter(someting)
+  .filter(someting)
+``` 
+
+가령 위처럼 작성하면 O * 3 번 돌거라 유추되는데 
+chain 에서 성능 최적화가 일어나 내부적으로 루프를 한번만 돈다.
+
+어떻게 그런게 가능하냐면 `chain`은 이런식으로 동작하기때문.
+
+``` javascript
+var result = [];
+for (var i = 0; i < list.length; i++)
+    result.push(filter(filter(map(list[i])))
+``` 
+
+요약하면
+
+* `lodash` : 지연평가와 chain 을 이용하여 최적화 해준다. 다만 표본(Array)의 갯수가 적을경우 약간 성능 손해본다.
+* `underscore` : 우리가 머리속에 생각하는 그대로 실행된다. `앞으로만 가는` 함수를 제공하며 성능 최적화는 개발자에게 맞긴다. Badass 😎 
+
