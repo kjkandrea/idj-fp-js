@@ -10,9 +10,6 @@ const _ = {}
 //   return newList;
 // }
 
-// newList.push(iteratee(data[i], i, data))
-_.map = bloop(() => [], ((val, object) => object.push(val)))
-
 _.identity = v => v
 
 _.values = list => _.map(list, _.identity)
@@ -22,7 +19,14 @@ _.args1 = (a, b) => b
 
 _.keys = list => _.map(list, _.args1)
 
-_.each = bloop(_.identity, () => {}) // 아무일을 하지않는것도 로직이다.
+_.array = () => []
+
+_.pushTo = (value, object) => object.push(value)
+
+_.noop = () => {}
+
+_.map = bloop(_.array, (_.pushTo))
+_.each = bloop(_.identity, _.noop) // 아무일을 하지않는것도 로직이다.
 
 export const test = () => {
   console.log(
