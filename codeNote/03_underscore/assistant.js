@@ -42,4 +42,8 @@ export const assistant = () => console.log(
   isArrayLike({}),
   isArrayLike(null),
   isArrayLike({ length: 2 }),
+  '\nbloop test',
+  bloop
+    (() => [], (value, object) => object.push(value))
+    ([5, 6, 7], v => v - 1),
 )

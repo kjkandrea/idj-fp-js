@@ -22,7 +22,7 @@ _.args1 = (a, b) => b
 
 _.keys = list => _.map(list, _.args1)
 
-_.each = bloop(_.identity, () => {})
+_.each = bloop(_.identity, () => {}) // 아무일을 하지않는것도 로직이다.
 
 export const test = () => {
   console.log(
