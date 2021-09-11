@@ -1,4 +1,4 @@
-import { isArrayLike } from './assistant.js'
+import { bloop, isArrayLike } from './assistant.js'
 
 const _ = {}
 
@@ -10,22 +10,8 @@ const _ = {}
 //   return newList;
 // }
 
-_.map = (data, iteratee) => {
-  const newList = []
-  if (isArrayLike(data)) {
-    for (let i = 0, len = data.length; i < len; i++) {
-      newList.push(iteratee(data[i], i, data))
-    }
-  }
-  else {
-    for (let key in data) {
-      if (data.hasOwnProperty(key)) {
-        newList.push(iteratee(data[key], key, data))
-      }
-    }
-  }
-  return newList
-}
+// newList.push(iteratee(data[i], i, data))
+_.map = bloop(() => [], ((val, object) => object.push(val)))
 
 _.identity = v => v
 
@@ -36,20 +22,7 @@ _.args1 = (a, b) => b
 
 _.keys = list => _.map(list, _.args1)
 
-_.each = (data, iteratee) => {
-  if (isArrayLike(data)) {
-    for (let i = 0, len = data.length; i < len; i++) {
-      iteratee(data[i], i, data)
-    }
-  }
-  else {
-    for (let key in data) {
-      if (data.hasOwnProperty(key)) {
-        iteratee(data[key], key, data)
-      }
-    }
-  }
-}
+_.each = bloop(_.identity, () => {})
 
 export const test = () => {
   console.log(
