@@ -56,6 +56,12 @@ _.findIndex = bloop(_.constant(-1), _.rester(_.identity, 3), _.identity)
 _.findKey = bloop(_.noop, _.rester(_.identity, 3), _.identity)
 _.some = bloop(_.constant(false), _.constant(true), _.identity)
 _.every = bloop(_.constant(true), _.constant(false), _.not)
+_.reduce = (data, iteratee, memo) => {
+  _.each(data, (val, idx, data) => {
+    memo = iteratee(memo, val, idx, data)
+  })
+  return memo;
+}
 
 export const test = () => {
   const chapter1 = () => {
@@ -166,7 +172,17 @@ export const test = () => {
       '\nevery',
       _.every(users.get(), ({ age }) => age < 30), // false
       _.every(users.get(), ({ age }) => age < 1), // true
-      _.every(['truthy'])
+      _.every(['truthy']),
+    )
+  }
+
+  const chapter4 = () => {
+    console.log(
+      '\nreduce',
+      _.reduce(users.get(), (memo, user) => {
+        if (user.age > 30) memo.push(user.name)
+        return memo
+      }, [])
     )
   }
 
@@ -174,7 +190,8 @@ export const test = () => {
   // chapter1()
   // chapter2()
   // chapter2c1()
-  chapter3()
+  // chapter3()
+  chapter4();
 }
 
 export default _
