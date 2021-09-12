@@ -17,22 +17,19 @@ export const isArrayLike = list => {
 export const bloop = (newData, body, stopper, isReduce) => {
   return (data, iterPredi = _.identity, opt1) => {
     const result = newData(data)
-    let memo = isReduce ? opt1 : undefined;
-    if (isArrayLike(data)) {
-      for (let i = 0, len = data.length; i < len; i++) {
-        memo = isReduce ? iterPredi(memo, data[i], i, data) : iterPredi(data[i], i, data) // 결과를 재료로 사용하기위해 변수에 저장
-        if (!stopper) body(memo, result, data[i], i) // if no stopper
-        else if (stopper(memo)) return body(memo, result, data[i], i)
-      }
+    let memo = isReduce ? opt1 : undefined
+    let keys = isArrayLike(data) ? null : _.keys(data)
+
+    for (let i = 0, len = (keys || data).length; i < len; i++) {
+      const key = keys ? keys[i] : i;
+      memo = isReduce
+        ? iterPredi(memo, data[key], key, data)
+        : iterPredi(data[key], key, data)
+      if (!stopper) body(memo, result, data[i], i)
+      else if (stopper(memo)) return body(memo, result, data[i], i)
     }
-    else {
-      for (let i = 0, keys = _.keys(data), len = keys.length; i < len; i++) {
-        memo = isReduce ? iterPredi(memo, data[keys[i]], keys[i], data) : iterPredi(data[keys[i]], keys[i], data)
-        if (!stopper) body(memo, result, data[keys[i]])
-        else if (stopper(memo)) return body(memo, result, data[keys[i]], keys[i])
-      }
-    }
-    return isReduce ? memo : result;
+
+    return isReduce ? memo : result
   }
 }
 
