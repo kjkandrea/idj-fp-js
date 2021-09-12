@@ -155,7 +155,8 @@ export const test = () => {
       _.findIndex([1, 2, 3, 4], v => v === 4),
       _.findIndex([1, 2, 3, 4], v => v === 5),
       '\nfindKey',
-      _.findKey({ str: 'jk', num: 1, nu: null }, v => typeof v === 'number')
+      _.findKey({ str: 'jk', num: 1, nu: null }, v => typeof v === 'number'),
+      _.findKey([1,2,3,4,5], v => v === 3)
     )
   }
 
