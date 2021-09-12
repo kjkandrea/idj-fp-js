@@ -105,11 +105,11 @@ export const test = () => {
 
     _.rester(console.log, 2)(1, 2, 3, 4)
 
-    const sub = (a, b) => a - b;
+    const sub = (a, b) => a - b
     const sub2 = _.if(
       (a, b) => a >= b,
       sub,
-      () => new Error('a가 b보다 작습니다.')
+      () => new Error('a가 b보다 작습니다.'),
     )
     console.log(
       '\nsub2',
@@ -120,39 +120,39 @@ export const test = () => {
     const diff = _.if(
       (a, b) => a >= b,
       sub,
-      (a, b) => sub(b, a)
+      (a, b) => sub(b, a),
     )
     console.log(
       '\ndiff',
       diff(9, 1),
-      diff(5, 8)
+      diff(5, 8),
     )
     console.log(
       '\ntoArray2',
-      _.toArray2([1,2,3]),
-      _.toArray2({ a:1, b:2, c:3 })
+      _.toArray2([1, 2, 3]),
+      _.toArray2({ a: 1, b: 2, c: 3 }),
     )
     const square = _.safety(
       _.isNumber,
       a => a * a,
-      () => 0
+      () => 0,
     )
     console.log(
       '\nsquare',
-      square(5)
+      square(5),
     )
   }
 
   const chapter3 = () => {
     console.log(
       '\nfind',
-      _.find([1,2,3,4], v => v >= 3),
+      _.find([1, 2, 3, 4], v => v >= 3),
       _.find(users.get(), ({ age }) => age < 3),
       _.find(users.get(), ({ age }) => age > 99),
       '\nfindIndex',
-      _.findIndex([1,2,3,4], v => v === 2),
-    _.findIndex([1,2,3,4], v => v === 4),
-      _.findIndex([1,2,3,4], v => v === 5)
+      _.findIndex([1, 2, 3, 4], v => v === 2),
+      _.findIndex([1, 2, 3, 4], v => v === 4),
+      _.findIndex([1, 2, 3, 4], v => v === 5),
     )
   }
 
