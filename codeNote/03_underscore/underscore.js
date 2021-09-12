@@ -35,6 +35,8 @@ _.if = (validator, func, alter) => function () {
     : alter && alter.apply(null, arguments)
 }
 
+_.toArray2 = _.if(Array.isArray, _.identity, _.values)
+
 _.reverse = list => _.toArray(list).reverse()
 
 _.pushTo = (value, object) => object.push(value)
@@ -112,6 +114,11 @@ export const test = () => {
       '\ndiff',
       diff(9, 1),
       diff(5, 8)
+    )
+    console.log(
+      '\ntoArray2',
+      _.toArray2([1,2,3]),
+      _.toArray2({ a:1, b:2, c:3 })
     )
   }
 
