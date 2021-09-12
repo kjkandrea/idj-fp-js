@@ -162,11 +162,11 @@ export const test = () => {
       '\nsome',
       _.some(users.get(), ({ age }) => age > 99),
       _.some(users.get(), ({ age }) => age < 30),
-      _.some([0, null, undefined, 'trusy']),
+      _.some([0, null, undefined, 'truthy']),
       '\nevery',
       _.every(users.get(), ({ age }) => age < 30), // false
       _.every(users.get(), ({ age }) => age < 1), // true
-      _.every(['trusy'])
+      _.every(['truthy'])
     )
   }
 
