@@ -1,0 +1,27 @@
+{
+  "name": "idj-fp-js",
+  "version": "1.0.0",
+  "description": "함수형 자바스크립트 프로그래밍(유인동 저) 코드 필기",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kjkandrea/idj-fp-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kjkandrea/idj-fp-js/issues"
+  },
+  "homepage": "https://github.com/kjkandrea/idj-fp-js#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "underscore": "^1.13.1"
+  }
+}
