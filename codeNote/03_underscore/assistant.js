@@ -18,20 +18,42 @@ export const bloop = (newData, body, stopper, isReduce) => {
   return (data, iterPredi = _.identity, opt1) => {
     const result = newData(data)
     let memo = isReduce ? opt1 : undefined
-    let limiter = isReduce ? undefined : opt1 // reduce 가 아닐때에만 limiter 사용
-    let keys = isArrayLike(data) ? null : _.keys(data)
+    const limiter = isReduce ? undefined : opt1 // reduce 가 아닐때에만 limiter 사용
+    const keys = isArrayLike(data) ? null : _.keys(data)
 
-    for (let i = 0, len = (keys || data).length; i < len; i++) {
-      const key = keys ? keys[i] : i;
-      memo = isReduce
-        ? iterPredi(memo, data[key], key, data)
-        : iterPredi(data[key], key, data)
-      if (!stopper) body(memo, result, data[i], i)
-      else if (stopper(memo)) return body(memo, result, data[i], i)
-      if (limiter && limiter === result.length) break; // break;
+    if (isReduce) { // reduce
+      for (let i = 0, len = (keys || data).length; i < len; i++) {
+        const key = keys ? keys[i] : i
+        memo = iterPredi(memo, data[key], key, data)
+      }
+      return memo
     }
 
-    return isReduce ? memo : result
+    if (stopper) { // find, some, every, findIndex, findKey
+      for (let i = 0, len = (keys || data).length; i < len; i++) {
+        const key = keys ? keys[i] : i
+        memo = iterPredi(data[key], key, data)
+        if (stopper(memo)) {
+          return body(memo, result, data[i], i)
+        }
+      }
+    }
+    else if (limiter) { // each, map, filter, reject in limit
+      for (let i = 0, len = (keys || data).length; i < len; i++) {
+        const key = keys ? keys[i] : i
+        body(iterPredi(data[key], key, data), result, data[key])
+        if (limiter && limiter === result.length) {
+          break
+        } // break;
+      }
+    }
+    else { // each, map, filter, reject
+      for (let i = 0, len = (keys || data).length; i < len; i++) {
+        const key = keys ? keys[i] : i
+        body(iterPredi(data[key], key, data), result, data[key])
+      }
+    }
+    return result
   }
 }
 
