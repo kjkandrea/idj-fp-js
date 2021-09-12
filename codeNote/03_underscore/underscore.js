@@ -98,6 +98,17 @@ export const test = () => {
     sub2(10, 5),
     // sub2(5, 10), // Error: a가 b보다 작습니다.
   )
+
+  const diff = _.if(
+    (a, b) => a >= b,
+    sub,
+    (a, b) => sub(b, a)
+  )
+  console.log(
+    '\ndiff',
+    diff(9, 1),
+    diff(5, 8)
+  )
 }
 
 export default _
