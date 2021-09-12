@@ -202,9 +202,9 @@ export const test = () => {
 
   // runner
   // chapter1()
-  // chapter2()
+  chapter2()
   // chapter2c1()
-  // chapter3()
+  chapter3()
   // chapter4();
   chapter5()
 }

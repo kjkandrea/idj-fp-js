@@ -34,7 +34,7 @@ export const bloop = (newData, body, stopper, isReduce) => {
         const key = keys ? keys[i] : i
         memo = iterPredi(data[key], key, data)
         if (stopper(memo)) {
-          return body(memo, result, data[i], i)
+          return body(memo, result, data[key], key)
         }
       }
     }
