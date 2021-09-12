@@ -25,14 +25,9 @@ _.pushTo = (value, object) => object.push(value)
 
 _.noop = () => {}
 
-_.map = bloop(_.array, (_.pushTo))
+_.map = bloop(_.array, _.pushTo)
 _.each = bloop(_.identity, _.noop) // 아무일을 하지않는것도 로직이다.
-
-function filter (list, predicate) {
-  const newList = []
-  _.each(list, (val, idx, list) => predicate(val, idx, list) && newList.push(val))
-  return newList
-}
+_.filter = bloop(_.array, (boolean, object, value) => boolean && object.push(value))
 
 
 export const test = () => {
@@ -61,9 +56,9 @@ export const test = () => {
     // Object.keys(null) // TypeError: Cannot convert undefined or null to object
   )
   console.log(
-    '\nold filter :',
-    filter([1,2,3], v => v > 2),
-    filter({ a: 1, b: 2, c: 3 }, v => v > 2)
+    '\nfilter :',
+    _.filter([1,2,3], v => v > 2),
+    _.filter({ a: 1, b: 2, c: 3 }, v => v > 2)
   )
 }
 

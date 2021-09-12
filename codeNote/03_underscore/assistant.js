@@ -19,8 +19,7 @@ export const bloop = (newData, body) => {
     }
     else {
       for (let i = 0, keys = _.keys(data), len = keys.length; i < len; i++) {
-        body(iterPredi(data[keys[i]], keys[i], data),
-          result, data[i])
+        body(iterPredi(data[keys[i]], keys[i], data), result, data[keys[i]])
       }
     }
     return result
