@@ -28,6 +28,17 @@ _.noop = () => {}
 _.map = bloop(_.array, (_.pushTo))
 _.each = bloop(_.identity, _.noop) // 아무일을 하지않는것도 로직이다.
 
+function oldFilter (list, predicate) {
+  const newList = [] // 이전 값(list) 의 상태를 변경하지않고 새로운 리스트를 생성. 불변성과 관련된 중요한 콘셉트.
+  for (let i = 0, len = list.length; i < len; i++) {
+    if (predicate(list[i])) { // predicate : 명제. 로직을 predicate 란 명칭으로 위임한다는 네이밍인듯.
+      newList.push(list[i])
+    }
+  }
+  return newList
+}
+
+
 export const test = () => {
   console.log(
     'map :',
@@ -52,6 +63,10 @@ export const test = () => {
     Object.keys(10), // []
     _.keys(null), // []
     // Object.keys(null) // TypeError: Cannot convert undefined or null to object
+  )
+  console.log(
+    '\nold filter :',
+    oldFilter([1,2,3], v => v % 2)
   )
 }
 
