@@ -35,6 +35,8 @@ _.reverse = list => _.toArray(list).reverse()
 
 _.pushTo = (value, object) => object.push(value)
 
+_.push = (object, value) => object.push(value) || object
+
 _.noop = () => {}
 
 _.constant = v => () => v
@@ -43,10 +45,9 @@ _.isNumber = a => toString.call(a) === '[object Number]'
 
 _.map = bloop(_.array, _.pushTo)
 _.each = bloop(_.identity, _.noop) // 아무일을 하지않는것도 로직이다.
-export const test = () => {
+_.filter = bloop(_.array, _.if(_.identity, _.rester(_.push)))
 
-  _.filter = bloop(_.array,
-    (boolean, object, value) => boolean && _.pushTo(value, object))
+export const test = () => {
   const chapter1 = () => {
     console.log(
       'map :',
@@ -81,6 +82,9 @@ export const test = () => {
       _.filter([1, 2, 3], v => v > 2),
       _.filter({ a: 1, b: 2, c: 3 }, v => v > 2),
     )
+  }
+
+  const chapter2c1 = () => {
     const sum = (a, b, c, d) => (a || 0) + (b || 0) + (c || 0) + (d || 0)
     console.log(
       '\nrester',
@@ -132,6 +136,7 @@ export const test = () => {
   // runner
   // chapter1()
   chapter2()
+  // chapter2c1()
 }
 
 export default _
