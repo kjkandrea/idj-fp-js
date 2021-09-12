@@ -39,12 +39,14 @@ _.noop = () => {}
 
 _.constant = v => () => v
 
+_.isNumber = a => toString.call(a) === '[object Number]'
+
 _.map = bloop(_.array, _.pushTo)
 _.each = bloop(_.identity, _.noop) // 아무일을 하지않는것도 로직이다.
-_.filter = bloop(_.array,
-  (boolean, object, value) => boolean && _.pushTo(value, object))
-
 export const test = () => {
+
+  _.filter = bloop(_.array,
+    (boolean, object, value) => boolean && _.pushTo(value, object))
   const chapter1 = () => {
     console.log(
       'map :',
@@ -117,7 +119,7 @@ export const test = () => {
       _.toArray2({ a:1, b:2, c:3 })
     )
     const square = _.safety(
-      a => toString.call(a) === '[object Number]',
+      _.isNumber,
       a => a * a,
       () => 0
     )
