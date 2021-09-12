@@ -21,13 +21,19 @@ _.keys = data => data ? Object.keys(data) : []
 
 _.array = () => []
 
+_.toArray = list => Array.isArray(list) ? list : _.values(list)
+
+_.rest = (list, num) => _.toArray(list).slice(num || 1)
+
+_.reverse = list => _.toArray(list).reverse()
+
 _.pushTo = (value, object) => object.push(value)
 
 _.noop = () => {}
 
 _.map = bloop(_.array, _.pushTo)
 _.each = bloop(_.identity, _.noop) // 아무일을 하지않는것도 로직이다.
-_.filter = bloop(_.array, (boolean, object, value) => boolean && object.push(value))
+_.filter = bloop(_.array, (boolean, object, value) => boolean && _.pushTo(value, object))
 
 
 export const test = () => {
