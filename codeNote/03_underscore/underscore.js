@@ -62,7 +62,8 @@ export const test = () => {
   )
   console.log(
     '\nold filter :',
-    oldFilter([1,2,3], v => v % 2)
+    oldFilter([1,2,3], v => v % 2),
+    oldFilter({ a: 1, b: 2, c: 3 }, v => v % 2)
   )
 }
 
