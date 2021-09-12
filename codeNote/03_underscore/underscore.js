@@ -145,7 +145,8 @@ export const test = () => {
     console.log(
       '\nfind',
       _.find([1,2,3,4], v => v >= 3),
-      _.find(users.get(), ({ age }) => age < 3)
+      _.find(users.get(), ({ age }) => age < 3),
+      _.find(users.get(), ({ age }) => age > 99)
     )
   }
 
