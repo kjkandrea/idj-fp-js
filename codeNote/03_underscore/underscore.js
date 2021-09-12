@@ -193,7 +193,10 @@ export const test = () => {
   const chapter5 = () => {
     console.log(
       '\nlimiter',
-      _.filter([1,2,3,4,5,6,7], v => v < 7, 4)
+      '\n  _.filter([1,2,3,4,5,6,7], v => v < 7, 4) :',
+      _.filter([1,2,3,4,5,6,7], v => v < 7, 4),
+      '\n  _.map([1,2,3,4,5,6,7], v => v * 3, 4)',
+      _.map([1,2,3,4,5,6,7], v => v * 3, 4)
     )
   }
 
