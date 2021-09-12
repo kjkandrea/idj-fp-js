@@ -190,12 +190,20 @@ export const test = () => {
     )
   }
 
+  const chapter5 = () => {
+    console.log(
+      '\nlimiter',
+      _.filter([1,2,3,4,5,6,7], v => v < 7, 4)
+    )
+  }
+
   // runner
   // chapter1()
   // chapter2()
   // chapter2c1()
   // chapter3()
-  chapter4();
+  // chapter4();
+  chapter5()
 }
 
 export default _

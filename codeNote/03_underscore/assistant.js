@@ -18,6 +18,7 @@ export const bloop = (newData, body, stopper, isReduce) => {
   return (data, iterPredi = _.identity, opt1) => {
     const result = newData(data)
     let memo = isReduce ? opt1 : undefined
+    let limiter = isReduce ? undefined : opt1 // reduce 가 아닐때에만 limiter 사용
     let keys = isArrayLike(data) ? null : _.keys(data)
 
     for (let i = 0, len = (keys || data).length; i < len; i++) {
@@ -27,6 +28,7 @@ export const bloop = (newData, body, stopper, isReduce) => {
         : iterPredi(data[key], key, data)
       if (!stopper) body(memo, result, data[i], i)
       else if (stopper(memo)) return body(memo, result, data[i], i)
+      if (limiter && limiter === result.length) break; // break;
     }
 
     return isReduce ? memo : result
