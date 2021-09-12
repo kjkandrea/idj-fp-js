@@ -10,17 +10,17 @@ export const isArrayLike = list => {
 }
 
 export const bloop = (newData, body) => {
-  return (data, iteratee) => {
+  return (data, iterPredi) => {
     const result = newData(data)
     if (isArrayLike(data)) {
       for (let i = 0, len = data.length; i < len; i++) {
-        body(iteratee(data[i], i, data), result)
+        body(iterPredi(data[i], i, data), result, data[i])
       }
     }
     else {
       for (let i = 0, keys = _.keys(data), len = keys.length; i < len; i++) {
-          body(iteratee(data[keys[i]], keys[i], data),
-            result)
+        body(iterPredi(data[keys[i]], keys[i], data),
+          result, data[i])
       }
     }
     return result
@@ -43,6 +43,6 @@ export const assistant = () => console.log(
   isArrayLike({ length: 2 }),
   '\nbloop test',
   bloop
-    (() => [], (value, object) => object.push(value))
-    ([5, 6, 7], v => v - 1),
+  (() => [], (value, object) => object.push(value))
+  ([5, 6, 7], v => v - 1),
 )
