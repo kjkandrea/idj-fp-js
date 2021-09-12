@@ -2,14 +2,6 @@ import { bloop, isArrayLike } from './assistant.js'
 
 const _ = {}
 
-// old version
-// _.map = (list, iteratee) => {
-//   const newList = [];
-//   for (let i = 0, len = list.length; i < len; i++)
-//     newList.push(iteratee(list[i], i, list))
-//   return newList;
-// }
-
 _.identity = v => v
 
 _.values = list => _.map(list, _.identity)
@@ -35,6 +27,8 @@ _.if = (validator, func, alter) => function () {
     : alter && alter.apply(null, arguments)
 }
 
+_.safety = _.if
+
 _.toArray2 = _.if(Array.isArray, _.identity, _.values)
 
 _.reverse = list => _.toArray(list).reverse()
@@ -42,6 +36,8 @@ _.reverse = list => _.toArray(list).reverse()
 _.pushTo = (value, object) => object.push(value)
 
 _.noop = () => {}
+
+_.constant = v => () => v
 
 _.map = bloop(_.array, _.pushTo)
 _.each = bloop(_.identity, _.noop) // 아무일을 하지않는것도 로직이다.
@@ -119,6 +115,15 @@ export const test = () => {
       '\ntoArray2',
       _.toArray2([1,2,3]),
       _.toArray2({ a:1, b:2, c:3 })
+    )
+    const square = _.safety(
+      a => toString.call(a) === '[object Number]',
+      a => a * a,
+      () => 0
+    )
+    console.log(
+      '\nsquare',
+      square(5)
     )
   }
 
