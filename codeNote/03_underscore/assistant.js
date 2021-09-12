@@ -9,17 +9,22 @@ export const isArrayLike = list => {
     && length >= 0 && length <= MAX_ARRAY_INDEX
 }
 
-export const bloop = (newData, body) => {
+export const bloop = (newData, body, stopper) => {
   return (data, iterPredi) => {
     const result = newData(data)
+    let memo;
     if (isArrayLike(data)) {
       for (let i = 0, len = data.length; i < len; i++) {
-        body(iterPredi(data[i], i, data), result, data[i])
+        memo = iterPredi(data[i], i, data) // 결과를 재료로 사용하기위해 변수에 저장
+        if (!stopper) body(memo, result, data[i], i) // if no stopper
+        else if (stopper(memo)) return body(memo, result, data[i], i)
       }
     }
     else {
       for (let i = 0, keys = _.keys(data), len = keys.length; i < len; i++) {
-        body(iterPredi(data[keys[i]], keys[i], data), result, data[keys[i]])
+        memo = iterPredi(data[keys[i]], keys[i], data)
+        if (!stopper) body(memo, result, data[keys[i]])
+        else if (stopper(memo)) return body(memo, result, data[keys[i]], keys[i])
       }
     }
     return result
