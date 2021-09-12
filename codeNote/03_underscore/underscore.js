@@ -180,9 +180,12 @@ export const test = () => {
     console.log(
       '\nreduce',
       _.reduce(users.get(), (memo, user) => {
-        if (user.age > 30) memo.push(user.name)
+        if (user.age > 30) {
+          memo.items.push(user.name)
+          memo.count++
+        }
         return memo
-      }, [])
+      }, {items: [], count: 0})
     )
   }
 
