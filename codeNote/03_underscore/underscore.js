@@ -55,6 +55,7 @@ _.find = bloop(_.noop, _.rester(_.identity, 2), _.identity)
 _.findIndex = bloop(_.constant(-1), _.rester(_.identity, 3), _.identity)
 _.findKey = bloop(_.noop, _.rester(_.identity, 3), _.identity)
 _.some = bloop(_.constant(false), _.constant(true), _.identity)
+_.every = bloop(_.constant(true), _.constant(false), _.identity)
 
 export const test = () => {
   const chapter1 = () => {
@@ -161,6 +162,9 @@ export const test = () => {
       '\nsome',
       _.some(users.get(), ({ age }) => age > 99),
       _.some(users.get(), ({ age }) => age < 30),
+      '\nevery',
+      _.every(users.get(), ({ age }) => age < 30), // false
+        _.every(users.get(), ({ age }) => age < 1) // true
     )
   }
 
