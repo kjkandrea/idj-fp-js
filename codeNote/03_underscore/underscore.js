@@ -25,7 +25,15 @@ _.toArray = list => Array.isArray(list) ? list : _.values(list)
 
 _.rest = (list, num) => _.toArray(list).slice(num || 1)
 
-_.rester = (func, num) => function () { return func.apply(null, _.rest(arguments, num)) }
+_.rester = (func, num) => function () {
+  return func.apply(null, _.rest(arguments, num))
+}
+
+_.if = (validator, func, alter) => function () {
+  return validator.apply(null, arguments)
+    ? func.apply(null, arguments)
+    : alter && alter.apply(null, arguments)
+}
 
 _.reverse = list => _.toArray(list).reverse()
 
@@ -78,6 +86,18 @@ export const test = () => {
   )
 
   _.rester(console.log, 2)(1, 2, 3, 4)
+
+  const sub = (a, b) => a - b;
+  const sub2 = _.if(
+    (a, b) => a >= b,
+    sub,
+    () => new Error('a가 b보다 작습니다.')
+  )
+  console.log(
+    '\nsub2',
+    sub2(10, 5),
+    // sub2(5, 10), // Error: a가 b보다 작습니다.
+  )
 }
 
 export default _
