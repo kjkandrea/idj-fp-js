@@ -1,4 +1,5 @@
-import { bloop, isArrayLike } from './assistant.js'
+import { bloop } from './assistant.js'
+import users from '../model/users.js'
 
 const _ = {}
 
@@ -143,7 +144,8 @@ export const test = () => {
   const chapter3 = () => {
     console.log(
       '\nfind',
-      _.find([1,2,3,4], v => v >= 3)
+      _.find([1,2,3,4], v => v >= 3),
+      _.find(users.get(), ({ age }) => age < 3)
     )
   }
 
