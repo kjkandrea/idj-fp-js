@@ -15,7 +15,7 @@ export const isArrayLike = list => {
  * @param body : ( boolean, result, value, index ) => any
  */
 export const bloop = (newData, body, stopper) => {
-  return (data, iterPredi) => {
+  return (data, iterPredi = _.identity) => {
     const result = newData(data)
     let memo;
     if (isArrayLike(data)) {
