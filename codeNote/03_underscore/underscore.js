@@ -43,9 +43,12 @@ _.constant = v => () => v
 
 _.isNumber = a => toString.call(a) === '[object Number]'
 
+_.not = v => !v
+
 _.map = bloop(_.array, _.pushTo)
 _.each = bloop(_.identity, _.noop) // 아무일을 하지않는것도 로직이다.
 _.filter = bloop(_.array, _.if(_.identity, _.rester(_.push)))
+_.reject = bloop(_.array, _.if(_.not, _.rester(_.push)))
 
 export const test = () => {
   const chapter1 = () => {
@@ -81,6 +84,9 @@ export const test = () => {
       '\nfilter :',
       _.filter([1, 2, 3], v => v > 2),
       _.filter({ a: 1, b: 2, c: 3 }, v => v > 2),
+      '\nreject :',
+      _.reject([1, 2, 3], v => v > 2),
+      _.reject({ a: 1, b: 2, c: 3 }, v => v > 2),
     )
   }
 
