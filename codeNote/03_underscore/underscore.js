@@ -48,7 +48,7 @@ _.not = v => !v
 _.map = bloop(_.array, _.pushTo)
 _.each = bloop(_.identity, _.noop) // 아무일을 하지않는것도 로직이다.
 _.filter = bloop(_.array, _.if(_.identity, _.rester(_.push)))
-_.reject = bloop(_.array, _.if(_.not, _.rester(_.push)))
+_.reject = bloop(_.array, _.if(_.not, _.rester(_.push))) // filter 랑 반대로 동작
 
 export const test = () => {
   const chapter1 = () => {
