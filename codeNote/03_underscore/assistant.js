@@ -9,6 +9,11 @@ export const isArrayLike = list => {
     && length >= 0 && length <= MAX_ARRAY_INDEX
 }
 
+/**
+ *
+ * @param newData : empty array construct function
+ * @param body : ( boolean, result, value, index ) => any
+ */
 export const bloop = (newData, body, stopper) => {
   return (data, iterPredi) => {
     const result = newData(data)
