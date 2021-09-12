@@ -28,9 +28,9 @@ _.noop = () => {}
 _.map = bloop(_.array, (_.pushTo))
 _.each = bloop(_.identity, _.noop) // 아무일을 하지않는것도 로직이다.
 
-function oldFilter (list, predicate) {
+function filter (list, predicate) {
   const newList = []
-  _.each(list, item => predicate(item) && newList.push(item))
+  _.each(list, (val, idx, list) => predicate(val, idx, list) && newList.push(val))
   return newList
 }
 
@@ -62,8 +62,8 @@ export const test = () => {
   )
   console.log(
     '\nold filter :',
-    oldFilter([1,2,3], v => v % 2),
-    oldFilter({ a: 1, b: 2, c: 3 }, v => v % 2)
+    filter([1,2,3], v => v > 2),
+    filter({ a: 1, b: 2, c: 3 }, v => v > 2)
   )
 }
 
