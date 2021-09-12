@@ -25,6 +25,8 @@ _.toArray = list => Array.isArray(list) ? list : _.values(list)
 
 _.rest = (list, num) => _.toArray(list).slice(num || 1)
 
+_.rester = (func, num) => function () { return func.apply(null, _.rest(arguments, num)) }
+
 _.reverse = list => _.toArray(list).reverse()
 
 _.pushTo = (value, object) => object.push(value)
@@ -33,8 +35,8 @@ _.noop = () => {}
 
 _.map = bloop(_.array, _.pushTo)
 _.each = bloop(_.identity, _.noop) // 아무일을 하지않는것도 로직이다.
-_.filter = bloop(_.array, (boolean, object, value) => boolean && _.pushTo(value, object))
-
+_.filter = bloop(_.array,
+  (boolean, object, value) => boolean && _.pushTo(value, object))
 
 export const test = () => {
   console.log(
@@ -54,18 +56,28 @@ export const test = () => {
   _.each({ a: 3, b: 2, c: 1 }, console.log)
   console.log(
     '\n_.keys vs Object.keys',
-    _.keys({ puppy: '🐶'}), // puppy
-    Object.keys({ puppy: '🐶'}), // puppy
+    _.keys({ puppy: '🐶' }), // puppy
+    Object.keys({ puppy: '🐶' }), // puppy
     _.keys(10), // []
     Object.keys(10), // []
     _.keys(null), // []
-    // Object.keys(null) // TypeError: Cannot convert undefined or null to object
+    // Object.keys(null) // TypeError: Cannot convert undefined or null to
+    // object
   )
   console.log(
     '\nfilter :',
-    _.filter([1,2,3], v => v > 2),
-    _.filter({ a: 1, b: 2, c: 3 }, v => v > 2)
+    _.filter([1, 2, 3], v => v > 2),
+    _.filter({ a: 1, b: 2, c: 3 }, v => v > 2),
   )
+  const sum = (a, b, c, d) => (a || 0) + (b || 0) + (c || 0) + (d || 0)
+  console.log(
+    '\nrester',
+    _.rester(sum)(1, 2, 3, 4),
+    _.rester(sum, 2)(1, 2, 3, 4),
+    _.rester(sum, 3)(1, 2, 3, 4),
+  )
+
+  _.rester(console.log, 2)(1, 2, 3, 4)
 }
 
-export default _;
+export default _
