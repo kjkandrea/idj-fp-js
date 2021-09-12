@@ -20,9 +20,10 @@ export const bloop = (newData, body, stopper, isReduce) => {
     let memo = isReduce ? opt1 : undefined
     const limiter = isReduce ? undefined : opt1 // reduce 가 아닐때에만 limiter 사용
     const keys = isArrayLike(data) ? null : _.keys(data)
+    let i = -1, len = (keys || data).length;
 
     if (isReduce) { // reduce
-      for (let i = 0, len = (keys || data).length; i < len; i++) {
+      while (++i < len) {
         const key = keys ? keys[i] : i
         memo = iterPredi(memo, data[key], key, data)
       }
@@ -30,7 +31,7 @@ export const bloop = (newData, body, stopper, isReduce) => {
     }
 
     if (stopper) { // find, some, every, findIndex, findKey
-      for (let i = 0, len = (keys || data).length; i < len; i++) {
+      while (++i < len) {
         const key = keys ? keys[i] : i
         memo = iterPredi(data[key], key, data)
         if (stopper(memo)) {
@@ -39,7 +40,7 @@ export const bloop = (newData, body, stopper, isReduce) => {
       }
     }
     else if (limiter) { // each, map, filter, reject in limit
-      for (let i = 0, len = (keys || data).length; i < len; i++) {
+      while (++i < len) {
         const key = keys ? keys[i] : i
         body(iterPredi(data[key], key, data), result, data[key])
         if (limiter && limiter === result.length) {
@@ -48,7 +49,7 @@ export const bloop = (newData, body, stopper, isReduce) => {
       }
     }
     else { // each, map, filter, reject
-      for (let i = 0, len = (keys || data).length; i < len; i++) {
+      while (++i < len) {
         const key = keys ? keys[i] : i
         body(iterPredi(data[key], key, data), result, data[key])
       }
