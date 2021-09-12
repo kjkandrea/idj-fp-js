@@ -53,6 +53,7 @@ _.reject = bloop(_.array, _.if(_.not, _.rester(_.push))) // filter 랑 반대로
 // _.find = bloop(_.noop, (bool, result, val) => val, _.identity)
 _.find = bloop(_.noop, _.rester(_.identity, 2), _.identity)
 _.findIndex = bloop(_.constant(-1), _.rester(_.identity, 3), _.identity)
+_.findKey = bloop(_.noop, _.rester(_.identity, 3), _.identity)
 
 export const test = () => {
   const chapter1 = () => {
@@ -153,6 +154,8 @@ export const test = () => {
       _.findIndex([1, 2, 3, 4], v => v === 2),
       _.findIndex([1, 2, 3, 4], v => v === 4),
       _.findIndex([1, 2, 3, 4], v => v === 5),
+      '\nfindKey',
+      _.findKey({ str: 'jk', num: 1, nu: null }, v => typeof v === 'number')
     )
   }
 
