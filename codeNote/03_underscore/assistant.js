@@ -14,25 +14,25 @@ export const isArrayLike = list => {
  * @param newData : empty array construct function
  * @param body : ( boolean, result, value, index ) => any
  */
-export const bloop = (newData, body, stopper) => {
-  return (data, iterPredi = _.identity) => {
+export const bloop = (newData, body, stopper, isReduce) => {
+  return (data, iterPredi = _.identity, opt1) => {
     const result = newData(data)
-    let memo;
+    let memo = isReduce ? opt1 : undefined;
     if (isArrayLike(data)) {
       for (let i = 0, len = data.length; i < len; i++) {
-        memo = iterPredi(data[i], i, data) // 결과를 재료로 사용하기위해 변수에 저장
+        memo = isReduce ? iterPredi(memo, data[i], i, data) : iterPredi(data[i], i, data) // 결과를 재료로 사용하기위해 변수에 저장
         if (!stopper) body(memo, result, data[i], i) // if no stopper
         else if (stopper(memo)) return body(memo, result, data[i], i)
       }
     }
     else {
       for (let i = 0, keys = _.keys(data), len = keys.length; i < len; i++) {
-        memo = iterPredi(data[keys[i]], keys[i], data)
+        memo = isReduce ? iterPredi(memo, data[keys[i]], keys[i], data) : iterPredi(data[keys[i]], keys[i], data)
         if (!stopper) body(memo, result, data[keys[i]])
         else if (stopper(memo)) return body(memo, result, data[keys[i]], keys[i])
       }
     }
-    return result
+    return isReduce ? memo : result;
   }
 }
 

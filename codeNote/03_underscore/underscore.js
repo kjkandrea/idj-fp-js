@@ -56,12 +56,13 @@ _.findIndex = bloop(_.constant(-1), _.rester(_.identity, 3), _.identity)
 _.findKey = bloop(_.noop, _.rester(_.identity, 3), _.identity)
 _.some = bloop(_.constant(false), _.constant(true), _.identity)
 _.every = bloop(_.constant(true), _.constant(false), _.not)
-_.reduce = (data, iteratee, memo) => {
-  _.each(data, (val, idx, data) => {
-    memo = iteratee(memo, val, idx, data)
-  })
-  return memo;
-}
+// _.reduce = (data, iteratee, memo) => {
+//   _.each(data, (val, idx, data) => {
+//     memo = iteratee(memo, val, idx, data)
+//   })
+//   return memo;
+// }
+_.reduce = bloop(_.noop, _.noop, undefined, true)
 
 export const test = () => {
   const chapter1 = () => {
