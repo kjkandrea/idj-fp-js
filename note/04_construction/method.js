@@ -11,19 +11,16 @@ class Counter {
   constructor (startNumber) {
     this.count = startNumber;
   }
-  increment() {
-    this.count++
-  }
-  decrement() {
-    this.count--
+  increment(num) {
+    this.count = this.count + num
   }
 }
 
 const counter = new Counter(0);
 
-const increment = method('increment')
-increment(counter)
-increment(counter)
-increment(counter)
+const incrementFive = method('increment', 5)
+incrementFive(counter)
+incrementFive(counter)
+incrementFive(counter)
 
 console.log(counter.count)
