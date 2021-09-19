@@ -5,8 +5,36 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        .box {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
-    <h1>hi</h1>
+<div id="box" class="box"></div>
+<script type="module">
+import _ from '../03_underscore/underscore.js'
+
+const method = function (method) {
+    const args = _.rest(arguments) // 첫번째 인자 제외
+    return function (obj) {
+        console.log(obj)
+        console.log(method)
+        console.log(args)
+        console.log(arguments)
+        console.log(args.concat(_.rest(arguments)))
+        return obj[method].apply(obj, args.concat(_.rest(arguments))) // 새 인자들 더하기
+    }
+}
+
+const bg = method('css', 'background-color')
+const $el = $('#box')
+bg($el, 'yellow')
+</script>
 </body>
 </html>
