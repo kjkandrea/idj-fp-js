@@ -4,4 +4,4 @@ const entries = [util]
 
 const run = chapter => () => { entries[chapter]() }
 
-export default run(0)
+export default run(1)

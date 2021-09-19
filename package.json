@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon",
-    "test": "mocha test/index.test.js"
+    "test": "mocha test/index.test.js",
+    "serve": "lite-server index.html --baseDir='note'"
   },
   "keywords": [],
   "devDependencies": {
     "assert": "^2.0.0",
+    "lite-server": "^2.6.1",
     "mocha": "^9.1.1",
     "nodemon": "^2.0.12"
   },
