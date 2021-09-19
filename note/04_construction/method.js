@@ -2,8 +2,8 @@ import _ from '../03_underscore/underscore.js'
 
 const method = function (method) {
   const args = _.rest(arguments) // 첫번째 인자 제외
-  return function (obj) {
-    return obj[method].apply(obj, args.concat(_.rest(arguments))) // 새 인자들 더하기
+  return function (context) {
+    return context[method].apply(context, args.concat(_.rest(arguments))) // 새 인자들 더하기
   }
 }
 
