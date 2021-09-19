@@ -15,18 +15,18 @@ const skip = body => {
 }
 
 function main() {
-  const now = once(()=> Date.now())
-  const twoSecondAfterNow = () => setTimeout(() => console.log(now()), 2000)
+  const printOnce = once(()=> console.log('once'))
+  printOnce()
+  printOnce()
+  printOnce()
+  printOnce()
 
-  console.log(now(), now())
-  twoSecondAfterNow()
 
-
-  const printOnce = skip(() => { console.log('skip'); return true })
-  printOnce()
-  printOnce()
-  printOnce()
-  printOnce()
+  const printSkip = skip(() => { console.log('skip'); return true })
+  printSkip()
+  printSkip()
+  printSkip()
+  printSkip()
 }
 
 export default main;
