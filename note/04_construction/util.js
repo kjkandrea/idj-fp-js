@@ -7,7 +7,7 @@ const once = func => {
   }
 }
 
-const skip = body => {
+const skip = body => { // confirm 과 함께 쓸듯
   let yes
   return function() {
     return yes || (yes = body.apply(null, arguments))
