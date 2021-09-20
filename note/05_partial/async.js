@@ -4,4 +4,13 @@ const asyncAdd = (a, b) => new Promise(resolve => {
   setTimeout(() => resolve(a + b), 200)
 })
 
-asyncAdd(2, 3).then(console.log)
+_.go(
+  _.mr(2, 3),
+  asyncAdd,
+  console.log
+)
+
+__( // pipe
+  asyncAdd,
+  console.log
+)(3, 4)
