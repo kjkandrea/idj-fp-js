@@ -25,6 +25,18 @@ const joinUser = pipeline(
   greeting
 )
 
+const joinCompany = pipeline(
+  joinAt,
+  member => {
+    companies.push(member)
+    member.id = companies.length
+    return member
+  },
+  greeting
+)
+
 console.log(
-  joinUser({ name: 'JK' })
+  joinUser({ name: 'JK' }),
+  '\n',
+  joinCompany({ name: 'NHN' })
 )
