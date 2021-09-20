@@ -142,6 +142,33 @@ pipe(
 
 하지만!!
 
+#### 찾아내기가 있다면 이야기가 달라진다.
+
+위 코드는 `수집하기 => 거르기`를 `거르기(수집하기())` 로 만들었다.\
+그리고 밑에 take 같은 찾아내기가 있다면!! 
+
+``` javascript 
+pipe(
+ L.map(foo)
+ L.filter(bar)
+ L.take(2)
+)(something)
+```
+
+이 녀석은!
+
+``` javascript
+// map + filter
+[
+  bar(foo(v)), 
+  bar(foo(v)), // 어 2개 찾았다. 이 밑으로 다 필요없음 
+  // bar(foo(v)), 
+  // bar(foo(v)), 
+  // bar(foo(v))
+  // ...
+]
+```
+
 
 
 
