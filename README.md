@@ -67,7 +67,7 @@ callback 이 아닌 listener, iteratee, predicate 를 구분해보자.
 * 접기 🤸🤼🤾 : 다 돌면서 좁히기\
  => `reduce`, `max`, `min`
 * 찾아내기 🤼🏌️ : 찾다가 결과과 나오면 나가기\
- => `find`, `some`, `every`, `findIndex` 
+ => `find`, `take`, `some`, `every`, `findIndex` 
  
  고민거리 : flatMap 은 어디지? 
 
@@ -92,7 +92,60 @@ _.go(
 2. 앞쪽 함수가 무거운 함수일때 (L.map)
 3. 뒤쪽으로 갈 수록 필요한 재료가 적을 때 (완성하는데 필요한 재료가 적을 때) 
 
-## 다시보는 underscore
+### 지연평가는 어떻게 이루어지는가? 
+
+#### 1. 준비. 배열 생성 최소화
+
+``` javascript 
+pipe(
+ map(foo)
+ filter(bar)
+)(something)
+```
+
+위 녀석은 이렇게 실행 될 것이다.
+
+##### 1. 수집하기
+
+``` javascript
+// map : foo 가 원하는대로 형태 변경
+[foo(v), foo(v), foo(v), foo(v), foo(v) ... ]  
+```
+
+##### 2. 거르기
+
+``` javascript
+// filter : bar 의 결과에 따라 걸러질지 여부 결정
+[bar(v), bar(v), bar(v), bar(v), bar(v) ... ]  
+```
+
+그런데 아래 녀석을 보자!
+
+``` javascript 
+pipe(
+ L.map(foo)
+ L.filter(bar)
+)(something)
+```
+
+이 녀석은 이렇게 실행된다.
+
+##### 수집하면서 거르기
+
+``` javascript
+// map + filter
+[bar(foo(v)), bar(foo(v)), bar(foo(v)), bar(foo(v)), bar(foo(v)) ...]
+```
+
+이게 유의미한 이득을 주지는 않는다. 
+(그래서 note 안에 테스트 코드중에 성능차 없는 테스트 케이스가 있음)
+
+하지만!!
+
+
+
+
+## 다시보는 underscore ( 이 밑으로 쓰잘데기 없는 내용 )
 
 책을 읽기전의 underscore 인상 : lodash 하위 호환에 함수별 모듈 설치가 안되는 후진 녀석
 
