@@ -56,6 +56,27 @@ callback 이 아닌 listener, iteratee, predicate 를 구분해보자.
 * `users.forEach(user => console.log(user))` => iteratee
 * `users.filter(user => user.age > 5)` => predicate
 
+## 지연평가 (Lazy, L)
+ 
+``` javascript
+_.go(
+  [2, 4, 11, 2, 7, 12],
+  L.map(square), // 3번 반복
+  L.every(v => v < 100), // 3번 반복
+
+  // 내부적으로 동작하는 모습은 다음과 같다.
+  // _.every(_.pipe(square, v => v < 100))
+  console.log, // false
+)
+```
+
+지연평가는 상황에 따라, 이득이 되기도하고 오히려 악영향을 주기도 함.
+이득이 될 수 있는 상황은 아래와 같음.
+
+1. 데이터가 많을 때
+2. 앞쪽 함수가 무거운 함수일때 (L.map)
+3. 뒤쪽으로 갈 수록 필요한 재료가 적을 때 (완성하는데 필요한 재료가 적을 때) 
+
 ## 다시보는 underscore
 
 책을 읽기전의 underscore 인상 : lodash 하위 호환에 함수별 모듈 설치가 안되는 후진 녀석
