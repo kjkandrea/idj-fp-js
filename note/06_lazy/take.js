@@ -14,6 +14,21 @@ const users = u.get();
     _.take(2)
   )
   console.log(result)
-  console.timeEnd()
+  console.timeEnd() // 2.6ms
+  console.groupEnd()
+})();
+
+// lazy
+(() => {
+  console.group('lazy')
+  console.time()
+  const result = _.go(
+    users,
+    L.filter(u => u.age > 20),
+    L.map(u => u.name),
+    L.take(2)
+  )
+  console.log(result)
+  console.timeEnd() // 0.3ms
   console.groupEnd()
 })();
