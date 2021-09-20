@@ -15,23 +15,21 @@ const joinAt = attrs =>
 const greeting = member =>
   `${member.name} 회원님은 ${member.id}번째 회원이십니다. 환영합니다.`
 
+const join = (pointer, member) => {
+  pointer.push(member)
+  member.id = users.length;
+  return member
+}
+
 const joinUser = pipeline(
   joinAt,
-  member => {
-    users.push(member)
-    member.id = users.length;
-    return member
-  },
+  member => join(users, member),
   greeting
 )
 
 const joinCompany = pipeline(
   joinAt,
-  member => {
-    companies.push(member)
-    member.id = companies.length
-    return member
-  },
+  member => join(companies, member),
   greeting
 )
 
