@@ -32,3 +32,20 @@ const users = u.get();
   console.timeEnd() // 0.3ms
   console.groupEnd()
 })();
+
+// primitive
+(() => {
+  console.group('primitive')
+  console.time()
+  const result = (() => {
+    const r = [];
+    for (let i = 0; i < users.length; i++) {
+      if (r.length >= 2) break;
+      if (users[i].age > 20) r.push(users[i].name)
+    }
+    return r;
+  })()
+  console.log(result)
+  console.timeEnd() // 0.06 ms
+  console.groupEnd()
+})();
