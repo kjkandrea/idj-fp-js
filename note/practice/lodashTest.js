@@ -1,13 +1,17 @@
 import _ from 'lodash'
 import md from '../model/users.js'
 
+const entries = Array(300)
+.fill(md.data)
+.reduce((a, c, i) => a.concat(c), [])
+.map((u, i) => ({ ...u, id: i}));
+
 (() => {
   console.group('basic')
 
-  let loop = 0;
   console.time()
-  const users = md.get().filter(u => u.age > 5).map(u => u.id)
-  console.log(users)
+  const users = entries.filter(u => u.age > 5).map(u => u.id)
+  console.log(users.join(','))
   console.timeEnd()
 
 
@@ -19,7 +23,7 @@ import md from '../model/users.js'
   console.group('chain')
 
   console.time()
-  const users = _.chain(md.get()).filter(u => u.age > 5).map(u => u.id).value()
+  const users = _.chain(entries).filter(u => u.age > 5).map(u => u.id).value()
   console.log(users)
   console.timeEnd()
 
@@ -37,7 +41,7 @@ import map from 'lodash/fp/map.js'
   const users = flow(
     filter(u => u.age > 5),
     map(u => u.id)
-  )(md.get())
+  )(entries)
   console.log(users)
   console.timeEnd()
 
