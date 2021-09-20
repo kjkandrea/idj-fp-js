@@ -68,6 +68,8 @@ callback 이 아닌 listener, iteratee, predicate 를 구분해보자.
  => `reduce`, `max`, `min`
 * 찾아내기 🤼🏌️ : 찾다가 결과과 나오면 나가기\
  => `find`, `some`, `every`, `findIndex` 
+ 
+ 고민거리 : flatMap 은 어디지? 
 
 ## 지연평가 (Lazy, L)
  
