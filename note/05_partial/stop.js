@@ -1,9 +1,15 @@
 import _ from 'partial-js'
 
-_.go(null,
+const giveMePuppy = _.go(
+  null,
   () => console.log('🐶'),
   () => console.log('🐶'),
-  _.stop,
+  () => _.stop('🐶'),
   () => console.log('👽'),
   () => console.log('👽'),
+  () => '👽'
+)
+
+console.log(
+  'my puppy : ' + giveMePuppy
 )
