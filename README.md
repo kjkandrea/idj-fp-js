@@ -47,7 +47,7 @@ function find <T>(list: T[], predicate: T => boolean) {
 
 ## 함수
 
-### instanceof '콜백함수' === '보조함수'
+### 콜백함수 instanceof 보조함수
 
 모든 보조함수는 콜백함수가 아니다.
 callback 이 아닌 listener, iteratee, predicate 를 구분해보자.
